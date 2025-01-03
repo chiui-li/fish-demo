@@ -1,0 +1,177 @@
+import React from "react";
+import { Card, Tag, Space, Badge, Typography,  } from "antd";
+import "./index.less";
+import {
+  EllipsisOutlined,
+  EditOutlined,
+  WeiboOutlined,
+} from '@ant-design/icons';
+
+
+export default function Bookmarks() {
+
+  return (
+    <div className="fish-bookmarks">
+      <Badge.Ribbon text="BookMarks">
+        <Card size="small" title="书签">
+          <div className="fish-bookmarks-links">
+            <Card className="fish-bookmarks-links-item" size="small">
+              <div className="fish-bookmarks-links-item-container" align="center" size={8}>
+                <Badge color="green" />
+                <img className="fish-bookmarks-links-item-icon" src="https://www.baidu.com/favicon.ico" alt="" />
+                <div className="fish-bookmarks-links-item-center" style={{ width: 'max-content' }}>
+                  <div style={{ width: '100%' }}>
+                    <Typography.Text className="fish-bookmarks-links-item-title" type="secondary">test</Typography.Text>
+                  </div>
+                  <Space>
+                    <Tag bordered={false} color="orange">标签1</Tag>
+                    <Tag bordered={false} color="orange">标签2</Tag>
+                  </Space>
+                </div>
+                <Space className="fish-bookmarks-links-item-actions" size={8}>
+                  <Typography.Text><EditOutlined /></Typography.Text>
+                </Space>
+              </div>
+            </Card>
+            <Card className="fish-bookmarks-links-item" size="small">
+              <div className="fish-bookmarks-links-item-container" align="center" size={8}>
+                <Badge color="green" />
+                <img className="fish-bookmarks-links-item-icon" src="https://www.baidu.com/favicon.ico" alt="" />
+                <div className="fish-bookmarks-links-item-center" style={{ width: 'max-content' }}>
+                  <div style={{ width: 'max-content' }}>
+                    <Typography.Text className="fish-bookmarks-links-item-title" type="secondary">飒飒飒飒阿斯顿撒的</Typography.Text>
+                  </div>
+                  <Space>
+                    <Tag bordered={false} color="orange">标签1</Tag>
+                    <Tag bordered={false} color="orange">标签2</Tag>
+                  </Space>
+                </div>
+                <Space className="fish-bookmarks-links-item-actions" size={8}>
+                  <Typography.Text><EditOutlined /></Typography.Text>
+                </Space>
+              </div>
+            </Card>
+            <Card className="fish-bookmarks-links-item" size="small">
+              <div className="fish-bookmarks-links-item-container" align="center" size={8}>
+                <Badge color="green" />
+                <img className="fish-bookmarks-links-item-icon" src="https://www.baidu.com/favicon.ico" alt="" />
+                <div className="fish-bookmarks-links-item-center" style={{ width: 'max-content' }}>
+                  <div style={{ width: 'max-content' }}>
+                    <Typography.Text className="fish-bookmarks-links-item-title" type="secondary">飒飒飒飒阿斯顿撒的</Typography.Text>
+                  </div>
+                  <Space>
+                    <Tag bordered={false} color="orange">标签1</Tag>
+                    <Tag bordered={false} color="orange">标签2</Tag>
+                  </Space>
+                </div>
+                <Space className="fish-bookmarks-links-item-actions" size={8}>
+                  <Typography.Text><EditOutlined /></Typography.Text>
+                </Space>
+              </div>
+            </Card>
+            <Card className="fish-bookmarks-links-item" size="small">
+              <div className="fish-bookmarks-links-item-container" align="center" size={8}>
+                <Badge color="green" />
+                <img className="fish-bookmarks-links-item-icon" src="https://www.baidu.com/favicon.ico" alt="" />
+                <div className="fish-bookmarks-links-item-center" style={{ width: 'max-content' }}>
+                  <div style={{ width: 'max-content' }}>
+                    <Typography.Text className="fish-bookmarks-links-item-title" type="secondary">飒飒飒飒阿斯顿撒的</Typography.Text>
+                  </div>
+                  <Space>
+                    <Tag bordered={false} color="orange">标签1</Tag>
+                    <Tag bordered={false} color="orange">标签2</Tag>
+                  </Space>
+                </div>
+                <Space className="fish-bookmarks-links-item-actions" size={8}>
+                  <Typography.Text><EditOutlined /></Typography.Text>
+                </Space>
+              </div>
+            </Card>
+            <Card className="fish-bookmarks-links-item" size="small">
+              <div className="fish-bookmarks-links-item-container" align="center" size={8}>
+                <Badge color="green" />
+                <img className="fish-bookmarks-links-item-icon" src="https://www.baidu.com/favicon.ico" alt="" />
+                <div className="fish-bookmarks-links-item-center" style={{ width: 'max-content' }}>
+                  <div style={{ width: 'max-content' }}>
+                    <Typography.Text className="fish-bookmarks-links-item-title" type="secondary">飒飒飒飒阿斯s ss s s顿撒ss的</Typography.Text>
+                  </div>
+                  <Space>
+                    <Tag bordered={false} color="orange">标签1</Tag>
+                    <Tag bordered={false} color="orange">标签2</Tag>
+                  </Space>
+                </div>
+                <Space className="fish-bookmarks-links-item-actions" size={8}>
+                  <Typography.Text><EditOutlined /></Typography.Text>
+                </Space>
+              </div>
+            </Card>
+          </div>
+        </Card>
+      </Badge.Ribbon>
+
+    </div>
+  );
+}
+.fish-bookmarks {
+  // max-width: 774px;
+  &-title {
+    font-size: 16px;
+    color: #333;
+  }
+
+  &-links {
+    display: flex;
+    gap: 8px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    &-item {
+      display: flex;
+      flex: 0 0;
+      // flex-basis: content;
+      max-width: min-content;
+      // min-width: 200px;
+      .ant-card-body {
+        width: 100%;
+      }
+
+      &-center{
+        display: flex;
+        flex-direction: column ;
+        justify-content: center;
+        align-items: flex-start;
+        // gap: 0px;
+      }
+
+      &-container {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        font-size: 14px;
+        gap: 10px;
+        width: 100%;
+        flex-wrap: nowrap;
+      }
+
+      &-icon {
+        width: auto;
+        height: 38px;
+        object-fit: cover;
+      }
+
+      &-title {
+        margin-left: 4px;
+        width: 100%;
+        white-space: nowrap;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      &-actions {
+        margin-left: auto;
+      }
+    }
+  }
+}
