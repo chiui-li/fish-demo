@@ -1,0 +1,86 @@
+import React, { useState } from "react";
+import "./index.less"
+import { Card, Badge } from 'antd'
+import {
+  PlusOutlined
+} from '@ant-design/icons';
+
+
+
+export default function TimeList() {
+  const [list,] = useState([{
+    date: "2025-01-19",
+    title: "发财",
+    description: "aaaaaa",
+  }
+    ,
+  {
+    date: "2025-01-06",
+    title: "暴富",
+    description: "aaaaaa",
+  },
+  {
+    date: "2025-01-05",
+    title: "考试",
+    description: "aaaaaa",
+  }
+  ])
+  return <Card
+    title="日期"
+    className="fish-time-list"
+    size="small"
+    extra={<PlusOutlined />}
+  >
+    <div className="fish-time-list-box">
+      {
+        list.map(i => {
+          return < >
+            <div className="fish-time-list-item">
+              <Badge status="success"></Badge>
+              <span className="fish-time-list-item-title">
+                {i.title}
+                还有
+              </span>
+              <span style={{ marginLeft: "auto" }} className="fish-time-list-item-time">2天 ({i.date})</span>
+            </div>
+          </>
+        })
+      }
+    </div>
+  </Card>
+}
+
+.fish-time-list {
+  .ant-card-body{
+    padding: 0;
+  }
+  &-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 10px;
+  }
+
+  &-item {
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 6px;
+    line-height: normal;
+    font-family: 'Courier New', Courier, monospace;
+    font-family: 'Open Sans', sans-serif;
+    &-title {
+      font-size: 14px;
+      color: #444;
+    }
+
+    &-time {
+      font-size: 14px;
+      color: gray;
+    }
+  }
+}
