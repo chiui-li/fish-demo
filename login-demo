@@ -1,0 +1,51 @@
+import { Form, Input, Typography, Segmented, Button } from 'antd'
+import React from 'react'
+import "./index.less"
+
+export default function Login() {
+  return <div className='login'>
+    <div className='login-title'>
+      <div>
+       🐟 fish-fun
+      </div>
+      <Segmented
+       className='login-option'
+       options={
+        [
+          { label: "登陆", value: 2 }, 
+          { label: "注册", value: "1", }, 
+          {
+            label: "更改密码",
+            value: "3"
+          }
+        ]}></Segmented>
+    </div>
+    <Form className='form'>
+      <Form.Item label="">
+        <Input  variant="filled" placeholder='邮箱'></Input>
+      </Form.Item>
+      <Form.Item label="">
+        <Input.Password variant="filled" placeholder='密码'></Input.Password>
+      </Form.Item>
+    </Form>
+    <div>
+      <Button variant="filled" type="primary">确认</Button>
+    </div>
+  </div>
+}
+
+.login{
+  width: 400px;
+  &-title{
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &-option{
+  }
+}
+
+.form{
+}
