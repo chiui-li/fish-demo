@@ -1,0 +1,130 @@
+import React, { useEffect, useRef, useState } from 'react'
+import { AutoComplete, Segmented, Input } from 'antd'
+import "./index.less"
+import {
+  EnterOutlined,
+} from '@ant-design/icons';
+import { set } from 'lodash-es'
+import { reqSearchPromptJSONPWithDebounce, searchEngineURL, handlerKeyWord } from './utils'
+
+const SearchEngine = ["google", "baidu"]
+
+export default function SearchInput() {
+  const [engine, setEngine] = useState("google");
+  const [options, setOptions] = useState([]);
+  const searchKeyword = useRef('')
+  const input = useRef(null)
+
+  useEffect(() => {
+    set(window, "fish_fun.jsonp.google", function (suggestion) {
+      if (suggestion && suggestion[1]) {
+        const url = searchEngineURL["google"]
+        setOptions(suggestion[1].map(i => ({
+          value: i,
+          label: <div>
+            <a target="_blank" href={url + handlerKeyWord(i)}>{i}</a>
+          </div>
+        })))
+      }
+    })
+    set(window, "fish_fun.jsonp.baidu", function (suggestion) {
+      const url = searchEngineURL["baidu"]
+      if (suggestion.s) {
+        setOptions(suggestion.s.map(i => ({
+          value: i,
+          label:
+            <div>
+              <a target="_blank" href={url + handlerKeyWord(i)}>{i}</a>
+            </div>
+        })))
+      }
+    })
+  }, [])
+
+  return <div className='search-input'>
+    <div className="search-input-container">
+      <Segmented
+        options={SearchEngine}
+        value={engine}
+        onChange={v => {
+          setOptions([])
+          setEngine(v)
+        }}
+
+      />
+      <AutoComplete
+        className='search-input-btn'
+        variant="filled"
+        options={options}
+        width="100%"
+        onSelect={v => {
+          const url = searchEngineURL[engine]
+          window.open(url + handlerKeyWord(v), "_blank")
+        }}
+        onKeyDown={
+          (e) => {
+            if (e.key === 'Enter') {
+              const url = searchEngineURL[engine]
+              window.open(url + handlerKeyWord(searchKeyword.current), "_blank")
+              e.stopPropagation()
+            }
+          }
+        }
+      >
+        <Input.Search
+          ref={input}
+          onFocus={() => reqSearchPromptJSONPWithDebounce(handlerKeyWord(searchKeyword.current), engine)}
+          onChange={e => {
+            searchKeyword.current = e.target.value
+            reqSearchPromptJSONPWithDebounce(handlerKeyWord(e.target.value), engine)
+          }} variant="filled" placeholder="搜索..." enterButton={<EnterOutlined />} />
+      </AutoComplete>
+    </div>
+  </div>
+}
+
+.search-input{
+  width: 100%;
+  &-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+  }
+  &-btn{
+    width: 100%;
+  }
+}
+
+import { debounce } from 'lodash-es'
+
+const searchEngineSuggestionURL = {
+  "google": "//suggestqueries.google.com/complete/search?client=chrome&q={content}&jsonp=window.fish_fun.jsonp.google",
+  "baidu": "//suggestion.baidu.com/su?wd={content}&cb=window.fish_fun.jsonp.baidu"
+}
+
+export const searchEngineURL = {
+  "google": "//www.google.com.hk/search?q=",
+  "baidu": "//www.baidu.com/s?wd=",
+}
+
+export const reqSearchPromptJSONPWithDebounce = debounce(function reqSearchPromptJSONP(content = "", engine = "google") {
+  if (content) {
+    const jsonp = document.createElement("script")
+    jsonp.src = searchEngineSuggestionURL[engine].replace("{content}", content)
+    document.body.appendChild(jsonp);
+    jsonp.onload = () => {
+      jsonp.remove()
+    }
+  }
+}, 100)
+
+// export function
+
+export function handlerKeyWord(s = "") {
+  if (typeof s === 'string') {
+    return s.trim().split(/\s+/g).join("+")
+  }
+  return ""
+}
